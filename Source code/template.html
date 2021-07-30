@@ -1,0 +1,253 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+          integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+          crossorigin="anonymous"></script>
+  <style>
+    body {
+      font-family: Calibri, sans-serif;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 35pt;
+      margin-bottom: 0;
+    }
+
+    p {
+      font-size: 14pt;
+    }
+
+    #header {
+      display: flex;
+    }
+
+    #main-banner {
+      background-color: #729d39;
+      height: 580px;
+    }
+
+    .btn-transition {
+      transition: padding 0.2s ease-in-out;
+    }
+
+    .banner-heading {
+      margin: 0;
+      padding-top: 50px;
+      font-size: 45pt;
+      color: white;
+      margin-bottom: 70px;
+    }
+
+    .begin-btn {
+      cursor: pointer;
+      border: 3px solid white;
+      color: white;
+      font-size: 22pt;
+      padding: 5px 50px;
+      display: table;
+      font-weight: 600;
+      margin: auto;
+      margin-bottom: 60px;
+    }
+
+    .begin-btn:hover {
+      padding: 5px 60px;
+    }
+
+    .begin-btn:active {
+      padding: 5px 40px;
+
+    }
+
+    /*.banner-select {*/
+    /*display:flex;*/
+    /*color: white;*/
+    /*width: 600px;*/
+    /*margin: auto;*/
+    /*}*/
+
+    .banner-select td {
+      padding: 25px 50px;
+      color: white;
+    }
+
+    #navigation a {
+      color: #231f20;;
+      text-decoration: none;
+      font-size: 22pt;
+      border-bottom: 2px solid #729d39;
+      text-align: center;
+      padding: 14px 16px;
+      float: left;
+      width: auto;
+      display: block;
+      outline: 0;
+    }
+
+    #navigation {
+      width: 80%;
+      max-width: 1200px;
+    }
+    @media (max-width: 1200px) {
+      #navigation a {
+        font-size:18pt;
+      }
+      #navigation {
+        width: 100%;
+      }
+    }
+    @media (max-width:1000px) {
+
+    }
+
+    .main-content {
+      padding: 30px;
+      max-width: 1200px;
+      width: 80%;
+      margin: auto;
+      background-color: white;
+    }
+
+    .footer {
+      width: 100%;
+      background-color: #f1f1f1;
+    }
+
+    .footer table {
+      max-width: 600px;
+      margin: auto;
+      width: 80%;
+      padding: 25px 0;
+    }
+
+    #langSelect {
+      position: absolute;
+      height: 30px;
+      width: 100px;
+      right: 10px;
+      top: 50px;
+    }
+
+  </style>
+</head>
+<body>
+<div id="header">
+
+  <table id="navigation">
+    <tr>
+      <td>
+        <img src="img/logo.png" style="height:100px; padding:10px"/>
+      </td>
+      <td>
+        <a href="index.html" name="home"></a>
+      </td>
+      <td>
+        <a href="practice.php" name="practice"></a>
+      </td>
+      <td>
+        <a href="lessons.html" name="lessons"></a>
+      </td>
+      <td>
+        <a href="about.html" name="about"></a>
+      </td>
+      <td>
+        <a href="contact-us.html" name="contactus"></a>
+      </td>
+    </tr>
+  </table>
+  <select id="langSelect">
+    <option value="English">English</option>
+    <option value="Arabic">عربى</option>
+  </select>
+
+</div>
+<div id="main-banner">
+
+</div>
+
+<div class='main-content'>
+
+</div>
+
+<div class="footer">
+  <table>
+    <tr style="font-weight: 600">
+      <td>Heading 1</td>
+      <td>Heading 2</td>
+      <td>Heading 3</td>
+    </tr>
+    <tr>
+      <td>Links</td>
+      <td>Links</td>
+      <td>Links</td>
+    </tr>
+    <tr>
+      <td>Links</td>
+      <td>Links</td>
+      <td>Links</td>
+    </tr>
+    <tr>
+      <td>Links</td>
+      <td>Links</td>
+      <td>Links</td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    //Defines language for each element
+    var pageContent = {
+      navigation: {
+        en: ['Home', 'Practice', 'Lessons', 'About', 'Contact Us'],
+        ar: ['منزل', 'الدروس', 'ممارسة', 'معلومات عنا', 'اتصل بنا']
+      }
+    };
+
+    //Defines elements in HTML
+    var nagivation = $('#navigation').find('a'); //Navigation bar
+
+    //Initialise language based on select value on page load
+    setLanguage();
+
+    // Triggers change of language when language select is changed
+    $('#langSelect').on('change', function() {
+      setLanguage();
+    });
+
+    //Calls the relevant function based on which language is selected
+    function setLanguage() {
+      var language = $('#langSelect').val();
+      switch(language) {
+        case 'Arabic':
+          arabic();
+          break;
+        case 'English':
+          english();
+          break;
+        default:
+          english();
+      }
+    }
+
+    //Sets elements to Arabic translations
+    function arabic() {
+      nagivation.each(function(index) {
+        $(this).text(pageContent.navigation.ar[index]);
+      });
+
+    }
+
+    //Sets elements to English translations
+    function english() {
+      nagivation.each(function(index) {
+        $(this).text(pageContent.navigation.en[index]);
+      });
+    }
+  });
+</script>
